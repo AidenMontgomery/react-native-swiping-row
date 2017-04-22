@@ -7,7 +7,9 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  ListView
+  ListView,
+  Text,
+  View
 } from 'react-native';
 
 import TableRow from 'react-native-swiping-row';
