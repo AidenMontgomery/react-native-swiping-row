@@ -1,11 +1,13 @@
 ## React-Native-Swiping-Row
-Based on Wix react-native-animatable drawer
+Based on Wix [react-native-animatable](https://github.com/wix/react-native-interactable) drawer.
 
 A component that can be used in react-native ListView.
 
 Place buttons underneath your row.
 
 Specify what actions should be performed when the row is swiped fully right or left.
+
+![Running Example](https://raw.githubusercontent.com/AidenMontgomery/react-native-swiping-row/master/swiping.gif)
 
 ### Row Properties
 
