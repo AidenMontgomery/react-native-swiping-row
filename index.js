@@ -35,6 +35,7 @@ export default class TableRow extends Component {
 
     rightButtons: PropTypes.arrayOf(PropTypes.shape({
       defaultAction: PropTypes.bool,
+      width: PropTypes.number,
       fadeIn: PropTypes.bool,
       text: PropTypes.text,
       textStyle: PropTypes.object,
@@ -67,32 +68,46 @@ export default class TableRow extends Component {
   }
 
   _renderLeftButtons = (buttons, maxWidth) => {
-
+    let buttonWidths = 0;
     const height = 75;
     const halfRow = maxWidth / 2;
-    const buttonWidth = halfRow / buttons.length;
     let leftButtonControls = [];
     let defaultSet = false;
     let hasDefault = false;
     
     for (var i = 0; i < buttons.length; i++) {
       let {
-        defaultAction
+        defaultAction,
+        width
       } = buttons[i];
+
+      if (width) {
+        buttonWidths += width;
+      }
 
       hasDefault = hasDefault || defaultAction;
     }
 
     for (var i = 0; i < buttons.length; i++) {
       let {
+        defaultAction,
         fadeIn,
+        icon,
         onPress,
         onLongPress,
         style,
         text,
         textStyle,
-        defaultAction,
+        width
       } = buttons[i];
+
+      let buttonWidth = 0;
+
+      if (width) {
+        buttonWidth = width;
+      } else {
+        buttonWidth = buttonWidths / buttons.length;
+      }
 
       if (defaultAction) {
         if (defaultSet) {
@@ -121,8 +136,8 @@ export default class TableRow extends Component {
             flex: 0,
             height,
             width:  this._deltaX.interpolate({
-              inputRange: [-halfRow, 0, halfRow, halfRow + buttonWidth, halfRow + (2 * buttonWidth)],
-              outputRange: [0, 0, buttonWidth, halfRow + buttonWidth, halfRow + (2 * buttonWidth)]
+              inputRange: [-buttonWidths, 0, buttonWidths, buttonWidths + buttonWidth, buttonWidths + (2 * buttonWidth)],
+              outputRange: [0, 0, buttonWidth, buttonWidths + buttonWidth, buttonWidths + (2 * buttonWidth)]
             })
           });
         } else {
@@ -130,7 +145,7 @@ export default class TableRow extends Component {
             flex: 0,
             height,
             width:  this._deltaX.interpolate({
-              inputRange: [-halfRow, 0, halfRow, halfRow + buttonWidth, maxWidth],
+              inputRange: [-buttonWidths, 0, buttonWidths, buttonWidths + buttonWidth, maxWidth],
               outputRange: [0, 0, buttonWidth, 0, 0]
             }) 
           });
@@ -140,7 +155,7 @@ export default class TableRow extends Component {
             flex: 0,
             height,
             width:  this._deltaX.interpolate({
-              inputRange: [-halfRow, 0, halfRow],
+              inputRange: [-buttonWidths, 0, buttonWidths],
               outputRange: [0, 0, buttonWidth]
             }) 
           }
@@ -151,12 +166,14 @@ export default class TableRow extends Component {
         <TouchableHighlight onPress={onPress} onLongPress={onLongPress}>
           <View style={[{ height }, styles.buttonContainer]}>
             <Text style={textStyle}>{text}</Text>
+            { icon }
           </View>
         </TouchableHighlight>
       ) : (
         <TouchableNativeFeedback onPress={onPress} onLongPress={onLongPress} backgroundColor={TouchableNativeFeedback.SelectableBackground()}>
           <View style={[{ height }, styles.buttonContainer]}>
             <Text style={textStyle}>{text}</Text>
+            { icon }
           </View>
         </TouchableNativeFeedback>
       );
@@ -172,32 +189,46 @@ export default class TableRow extends Component {
   }
 
   _renderRightButtons = (buttons, maxWidth) => {
-
-    const height = 75;
-    const halfRow = maxWidth / 2;
-    const buttonWidth = halfRow / buttons.length;
-    let rightButtonControls = [];
-    let defaultSet = false;
     let hasDefault = false;
+    let buttonWidths = 0;
     
     for (var i = 0; i < buttons.length; i++) {
       let {
-        defaultAction
+        defaultAction,
+        width
       } = buttons[i];
+
+      if (width) {
+        buttonWidths += width;
+      }
 
       hasDefault = hasDefault || defaultAction;
     }
 
+    const height = 75;
+    let rightButtonControls = [];
+    let defaultSet = false;
+
     for (var i = buttons.length - 1; i >= 0; i--) {
       let {
+        defaultAction,
         fadeIn,
+        icon,
         onPress,
         onLongPress,
         style,
         text,
         textStyle,
-        defaultAction,
+        width,
       } = buttons[i];
+
+      let buttonWidth = 0;
+
+      if (width) {
+        buttonWidth = width;
+      } else {
+        buttonWidth = buttonWidths / buttons.length;
+      }
 
       if (defaultAction) {
         if (defaultSet) {
@@ -226,8 +257,8 @@ export default class TableRow extends Component {
             flex: 0,
             height,
             width:  this._deltaX.interpolate({
-              inputRange: [-maxWidth, -halfRow - (2 * buttonWidth), -halfRow - buttonWidth, -halfRow, 0],
-              outputRange: [maxWidth, halfRow + (2 * buttonWidth), halfRow + buttonWidth, buttonWidth, 0]
+              inputRange: [-maxWidth, -buttonWidths - (2 * buttonWidth), -buttonWidths - buttonWidth, -buttonWidths, 0],
+              outputRange: [maxWidth, buttonWidths + (2 * buttonWidth), buttonWidths + buttonWidth, buttonWidth, 0]
             }) 
           });
         } else {
@@ -235,8 +266,8 @@ export default class TableRow extends Component {
             flex: 0,
             height,
             width:  this._deltaX.interpolate({
-              inputRange: [-maxWidth, -halfRow - (2 * buttonWidth), -halfRow - buttonWidth, -halfRow, 0],
-              outputRange: [0, 0, 0, buttonWidth, 0]
+              inputRange:  [-maxWidth, -buttonWidths - (2 * buttonWidth), -buttonWidths - buttonWidth,    -buttonWidths, 0],
+              outputRange: [        0,                            0,                      0, buttonWidth, 0]
             }) 
           });
         }
@@ -245,7 +276,7 @@ export default class TableRow extends Component {
             flex: 0,
             height,
             width:  this._deltaX.interpolate({
-              inputRange: [-halfRow, 0],
+              inputRange: [-buttonWidths, 0],
               outputRange: [buttonWidth, 0]
             }) 
           }
@@ -256,12 +287,14 @@ export default class TableRow extends Component {
         <TouchableHighlight onPress={onPress} onLongPress={onLongPress}>
           <View style={[{ height }, styles.buttonContainer]}>
             <Text style={textStyle}>{text}</Text>
+            { icon }
           </View>
         </TouchableHighlight>
       ) : (
         <TouchableNativeFeedback onPress={onPress} onLongPress={onLongPress} backgroundColor={TouchableNativeFeedback.SelectableBackground()}>
           <View style={[{ height }, styles.buttonContainer]}>
             <Text style={textStyle}>{text}</Text>
+            { icon }
           </View>
         </TouchableNativeFeedback>
       );
@@ -277,8 +310,26 @@ export default class TableRow extends Component {
   }
 
   render(props) {
-		let {height, width} = Dimensions.get('window');
+		let { height, width } = Dimensions.get('window');
     let { children, leftButtons, rightButtons, leftFullSwipeAction, rightFullSwipeAction, style } = this.props;
+
+    let rightButtonsWidth = rightButtons.reduce((totalWidth, button) => {
+      let { width } = button;
+      if (width) {
+        totalWidth += width;
+      }
+
+      return totalWidth;
+    }, 0);
+
+    let leftButtonsWidth = leftButtons.reduce((totalWidth, button) => {
+      let { width } = button;
+      if (width) {
+        totalWidth += width;
+      }
+
+      return totalWidth;
+    }, 0);
 
     let rowStyle = {
       backgroundColor: 'white'
@@ -295,12 +346,12 @@ export default class TableRow extends Component {
           <View style={{position: 'absolute', right: 0, left: 0, height: 75, flexDirection: 'row', alignItems: 'center'}}>
             { this._renderLeftButtons(leftButtons, width) }
 						<View style={styles.spacer} />
-            { this._renderRightButtons(rightButtons, width)}
+            { this._renderRightButtons(rightButtons, rightButtonsWidth)}
           </View>
 
           <Interactable.View
             horizontalOnly={true}
-            snapPoints={[{x: 0, id: 'closed'}, {x: -(width / 2), id: 'open'}, {x: (width / 2), id: 'openLeft'}, {x: -width, id: FULL_OPEN_LEFT}, {x: width, id: FULL_OPEN_RIGHT}]}
+            snapPoints={[{x: 0, id: 'closed'}, {x: -rightButtonsWidth, id: 'open'}, {x: leftButtonsWidth, id: 'openLeft'}, {x: -width, id: FULL_OPEN_LEFT}, {x: width, id: FULL_OPEN_RIGHT}]}
             onSnap={this.onDrawerSnap}
             animatedValueX={this._deltaX}>
             <View style={{left: 0, right: 0, height: 75, backgroundColor: '#e0e0e0' }}>

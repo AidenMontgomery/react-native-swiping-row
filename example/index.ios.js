@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 
 import TableRow from 'react-native-swiping-row';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class example extends Component {
   constructor(props) {
@@ -38,6 +39,8 @@ export default class example extends Component {
           let leftButtons = [{
             defaultAction: false,
             fadeIn: true,
+            icon: <Icon name="thumbs-o-up" size={24} color={'white'} />,
+            width: 100,
             text: 'Left 1',
             textStyle: { color: 'white' },
             style: { backgroundColor: 'blue' },
@@ -46,6 +49,8 @@ export default class example extends Component {
           }, {
             defaultAction: true,
             fadeIn: true,
+            icon: <Icon name="flag" size={24} color={'white'} />,
+            width: 150,
             text: 'Left 2',
             textStyle: { color: 'white' },
             style: { backgroundColor: 'green' },
@@ -56,19 +61,13 @@ export default class example extends Component {
           let rightButtons = [{
             defaultAction: false,
             fadeIn: true,
-            text: 'Right 1',
+            icon: <Icon name="trash" size={24} color={'white'} />,
+            width: 100,
+            text: 'Delete',
             textStyle: { color: 'white' },
             style: { backgroundColor: 'red' },
             onPress: () => { console.log('Right Button 1 Pressed') },
             onLongPress: () => { console.log('Right Button 1 Long Press') }
-          }, {
-            defaultAction: false,
-            fadeIn: true,
-            text: 'Right 2',
-            textStyle: { color: 'white' },
-            style: { backgroundColor: 'purple' },
-            onPress: () => { console.log('Right Button 2 Pressed') },
-            onLongPress: () => { console.log('Right Button 2 Long Press') }
           }];
 
           return (
