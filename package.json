@@ -1,0 +1,41 @@
+{
+  "name": "react-native-swiping-row",
+  "version": "0.1.0",
+  "description": "React Native Swiping Row",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:aidenmontgomery/react-native-swiping-row.git"
+  },
+  "dependencies": {
+    "react-native-interactable": "0.0.8"
+  },
+  "devDependencies": {
+    "babel-jest": "19.0.0",
+    "babel-preset-react-native": "1.9.1",
+    "jest": "19.0.2",
+    "react-test-renderer": "16.0.0-alpha.6"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "react-component",
+    "drawer",
+    "table-row",
+    "swipeable",
+    "ios",
+    "android"
+  ],
+  "author": "aiden montgomery <aiden@constructivecoding.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aidenmontgomery/react-native-swiping-row/issues"
+  },
+  "homepage": "https://github.com/aidenmontgomery/react-native-swiping-row"
+}
