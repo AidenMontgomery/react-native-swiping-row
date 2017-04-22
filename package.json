@@ -11,6 +11,8 @@
     "url": "git@github.com:aidenmontgomery/react-native-swiping-row.git"
   },
   "dependencies": {
+    "@types/prop-types": "^15.5.1",
+    "prop-types": "^15.5.8",
     "react-native-interactable": "0.0.8"
   },
   "devDependencies": {
