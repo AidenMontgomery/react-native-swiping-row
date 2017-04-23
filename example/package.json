@@ -9,8 +9,7 @@
   "dependencies": {
     "react": "16.0.0-alpha.6",
     "react-native": "0.43.4",
-    "react-native-interactable": "0.0.8",
-    "react-native-swiping-row": "github:aidenmontgomery/react-native-swiping-row",
+    "react-native-swiping-row": "file:..",
     "react-native-vector-icons": "^4.0.1"
   },
   "devDependencies": {
