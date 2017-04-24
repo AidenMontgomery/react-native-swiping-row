@@ -7,7 +7,8 @@ Place buttons underneath your row.
 
 Specify what actions should be performed when the row is swiped fully right or left.
 
-![Running Example](https://raw.githubusercontent.com/AidenMontgomery/react-native-swiping-row/master/swiping.gif)
+![Running Example](https://raw.githubusercontent.com/AidenMontgomery/react-native-swiping-row/master/ios-example.gif)
+![Running Example](https://raw.githubusercontent.com/AidenMontgomery/react-native-swiping-row/master/android-example.gif)
 
 ### Row Properties
 
